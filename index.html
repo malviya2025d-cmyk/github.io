@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>SIP EMI FD Calculator India | Free Finance Calculator</title>
+
+<meta name="description" content="Free SIP, EMI, FD calculator for India. Calculate investment returns, loan EMI and fixed deposit interest instantly.">
+<meta name="keywords" content="sip calculator india, emi calculator, fd calculator, investment calculator">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="google-site-verification" content="BdU3wmPqMw5K4eVbBigPLo7WR8a60f-SuN" />
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX"
+crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+font-family:sans-serif;
+margin:0;
+background:linear-gradient(135deg,#1e3c72,#2a5298);
+color:#fff;
+text-align:center;
+}
+
+nav{
+background:#000;
+padding:10px;
+}
+
+nav a{
+color:#fff;
+margin:10px;
+text-decoration:none;
+font-weight:bold;
+cursor:pointer;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:20px;
+}
+
+.box{
+background:rgba(255,255,255,0.1);
+padding:20px;
+border-radius:15px;
+width:300px;
+}
+
+input,select{
+width:90%;
+padding:10px;
+margin:5px;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:10px;
+background:#00c6ff;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.section{
+display:none;
+padding:20px;
+max-width:800px;
+margin:auto;
+text-align:left;
+}
+
+.active{
+display:block;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+<a onclick="show('home')">Home</a>
+<a onclick="show('about')">About</a>
+<a onclick="show('privacy')">Privacy</a>
+</nav>
+
+<h1>📊 Finance Calculator Pro</h1>
+
+<!-- HOME -->
+<div id="home" class="active">
+
+<div class="container">
+
+<div class="box">
+<h2>SIP</h2>
+<input id="sip_amt" placeholder="Monthly ₹">
+<input id="sip_rate" placeholder="Rate %">
+<input id="sip_time" placeholder="Years">
+<button onclick="calcSIP()">Calculate</button>
+<h3 id="sip_result"></h3>
+</div>
+
+<div class="box">
+<h2>EMI</h2>
+<input id="loan_amt" placeholder="Loan ₹">
+<input id="loan_rate" placeholder="Rate %">
+<input id="loan_time" placeholder="Years">
+<button onclick="calcEMI()">Calculate</button>
+<h3 id="emi_result"></h3>
+</div>
+
+<div class="box">
+<h2>FD</h2>
+<input id="fd_amt" placeholder="Amount ₹">
+<input id="fd_rate" placeholder="Rate %">
+<input id="fd_time" placeholder="Years">
+<button onclick="calcFD()">Calculate</button>
+<h3 id="fd_result"></h3>
+</div>
+
+</div>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="section">
+<h2>About Us</h2>
+<p>
+This free finance calculator helps you calculate SIP, EMI, and FD returns easily. It is designed for Indian users who want quick financial planning tools.
+</p>
+
+<h3>Why use this tool?</h3>
+<ul>
+<li>Fast and free</li>
+<li>No login required</li>
+<li>Accurate results</li>
+</ul>
+</div>
+
+<!-- PRIVACY -->
+<div id="privacy" class="section">
+<h2>Privacy Policy</h2>
+<p>
+We respect your privacy. This website does not collect personal data. All calculations are done in your browser.
+</p>
+
+<p>
+We may use Google AdSense which uses cookies to show relevant ads.
+</p>
+</div>
+
+<!-- SEO CONTENT -->
+<div class="section active">
+<h2>Best Finance Calculator India</h2>
+<p>
+Use this free SIP EMI FD calculator to plan your investments smartly. Calculate returns, EMI and FD interest instantly.
+</p>
+</div>
+
+<script>
+function show(id){
+document.getElementById('home').style.display='none';
+document.getElementById('about').style.display='none';
+document.getElementById('privacy').style.display='none';
+document.getElementById(id).style.display='block';
+}
+
+let chart;
+
+function drawChart(value){
+ if(chart) chart.destroy();
+ let ctx=document.getElementById("chart");
+ chart=new Chart(ctx,{
+  type:'bar',
+  data:{labels:['Result'],datasets:[{label:'Amount',data:[value]}]}
+ });
+}
+
+function calcSIP(){
+ let P=+sip_amt.value;
+ let r=sip_rate.value/100/12;
+ let n=sip_time.value*12;
+ let FV=P*((Math.pow(1+r,n)-1)/r)*(1+r);
+ sip_result.innerText="₹ "+FV.toFixed(0);
+ drawChart(FV);
+}
+
+function calcEMI(){
+ let P=+loan_amt.value;
+ let r=loan_rate.value/100/12;
+ let n=loan_time.value*12;
+ let EMI=(P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+ emi_result.innerText="₹ "+EMI.toFixed(0);
+ drawChart(EMI);
+}
+
+function calcFD(){
+ let P=+fd_amt.value;
+ let r=fd_rate.value/100;
+ let t=fd_time.value;
+ let A=P*Math.pow(1+r,t);
+ fd_result.innerText="₹ "+A.toFixed(0);
+ drawChart(A);
+}
+</script>
+
+</body>
+</html>
